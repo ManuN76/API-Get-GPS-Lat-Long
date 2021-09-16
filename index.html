@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Glide Yes-Code</title>
+</head>
+<div>
+  <span id="result"></span>
+</div>
+<script src="function.js"></script>
+<script src="driver.js"></script>
+
+
+<script>
+  // TEST DEBUG !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  testDebug();
+
+  async function testDebug() {
+  let adresse = { type: "string", value: "White House" };
+  let key = {type:"string", value: ""};
+  let result = await window.function(adresse, key);
+  document.getElementById("result").innerHTML = result;
+
+  }
+</script>
+</body>
+
+</html>
