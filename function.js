@@ -1,16 +1,31 @@
+const cache = new Map();
+
 window.function = async function (address, keyapi) {
-  let adr = address.value ?? "";
-  let key = keyapi.value ?? "";
+  if (address.value === undefined) return undefined;
 
-  const response = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${adr}&key=${key}`
-  );
+  let keyApi = keyapi.value ?? "";
 
-  const data = await response.json();
+  let adr = address.value;
 
-  if (data.error_message) {
-    return "Error :" + data.error_message;
+  let ret = cache.get(adr);
+
+  if (ret === undefined) {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${adr}&key=${atob(
+        keyApi
+      )}`
+    );
+
+    const data = await response.json();
+
+    if (data.error_message) {
+      ret = "Error :" + data.error_message;
+    } else {
+      ret = `${data.results[0].geometry.location.lat}, ${data.results[0].geometry.location.lng}`;
+
+      cache.set(adr, ret);
+    }
   }
 
-  return `${data.results[0].geometry.location.lat}, ${data.results[0].geometry.location.lng}`;
+  return ret;
 };

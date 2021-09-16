@@ -11,7 +11,7 @@
     },
     {
       "name": "keyapi",
-      "displayName": "Key API Google Map",
+      "displayName": "Key Api Google",
       "type": "string"
     }
   ],
